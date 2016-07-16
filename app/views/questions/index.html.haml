@@ -1,2 +1,18 @@
-index.html.haml
-=current_user.email
+%br
+-if @user.questions.empty?
+  %h3{align: "center"} You don't have a questions.
+  =link_to "Create your first!", new_question_path, class: "btn btn-info btn-block"
+
+-else
+  =link_to "Add next question", new_question_path, class: "btn btn-info btn-block"
+
+  %h3 Your questions
+
+  %table.table
+    %tr
+      %th Question text
+      %th Time for answer
+    -@questions.each do |q|
+      %tr
+        %td= q.body
+        %td= q.time

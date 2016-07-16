@@ -1,5 +1,11 @@
 -if user_signed_in?
   %li
+    =link_to "Feed", "#"
+  %li
+    =link_to "Users rating", "#"
+  %li
+    =link_to "My questions", questions_path
+  %li
     =link_to current_user.email, destroy_user_session_path, :method => :delete
 -else
   %li
