@@ -56,6 +56,15 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def evaluate
+    @answer = Answer.find(params[:answer_id])
+    @answer.correct = params[:evaluation]
+    @answer.save
+    if @answer.save
+      redirect_to question_path(@answer.question_id), notice: 'Answer evaluated.'
+    end
+  end
+
   private
 
     def question_params

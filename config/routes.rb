@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     get  'play', on: :member
     post  'answer', on: :member
   end
-  get  'feed', to: 'questions#feed', as: 'feed'
-  get  'result/:answer_id', to: 'questions#result', as: 'result'
-
+  get   'feed', to: 'questions#feed', as: 'feed'
+  get   'result/:answer_id', to: 'questions#result', as: 'result'
+  patch 'evaluate/:answer_id', to: 'questions#evaluate', as: 'evaluate'
 end

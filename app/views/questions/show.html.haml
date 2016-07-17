@@ -11,5 +11,23 @@
 %p Other answers:
 %h4= @question.other_answer
 
-%h3 Answers to reviese
+-if @question.other_answer
+  %h3 Answers to reviese
+
+  %table.table
+    %tr
+      %th #
+      %th Answer text
+      %th Action
+    -@question.answers.each_with_index do |a, i|
+      -index = i+1
+      %tr
+        %td= index
+        %td= a.body
+        %td
+          -if a.correct.nil?
+            =link_to "Right", evaluate_path(a.id, evaluation: true), method: :patch, class: "btn btn-success btn-sm"
+            =link_to "Wrong", evaluate_path(a.id, evaluation: false), method: :patch, class: "btn btn-danger btn-sm"
+          -else
+            #{a.correct == true ? "Right" : "Wrong"}
 
