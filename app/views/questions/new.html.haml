@@ -28,9 +28,9 @@
   .form-group
     = f.label "Other answers"
     %br
-    = radio_button_tag(:other_answer, true)
-    = label_tag(:yes, "Automaticaly count that any other answer is wrong")
     = radio_button_tag(:other_answer, false)
+    = label_tag(:yes, "Automaticaly count that any other answer is wrong")
+    = radio_button_tag(:other_answer, true)
     = label_tag(:no, "Give me the opportunity to review the answers")
   .form-group
     = f.label "Comment"
