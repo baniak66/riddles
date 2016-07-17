@@ -27,13 +27,19 @@ class QuestionsController < ApplicationController
   end
 
   def feed
-    @questions = Question.all.where.not(user_id: current_user.id, publish: true)
+    @questions = Question.all.where.not(user_id: current_user.id, publish: false)
+  end
+
+  def play
+    @question = Question.find(params[:id])
+    @answer = @question.answers.build
   end
 
   private
 
     def question_params
       params.require(:question).permit(:body, :time, :comment, :publish, :user_id,
-        answers_attributes: [:body, :_destroy])
+        answers_attributes: [:body, :user_id, :_destroy, :correct])
     end
+
 end

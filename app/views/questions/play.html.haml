@@ -1,0 +1,8 @@
+%h3{align: "center"}= @question.body
+
+=form_for @answer, url: answer_question_path do |f|
+  .form-group
+    = f.text_field :body, placeholder: 'Your answer', class: 'form-control'
+    = f.hidden_field :user_id, value: current_user.id
+    = f.hidden_field :question_id, value: @question.id
+  = f.submit 'Send answer', class: 'btn btn-info btn-block'
