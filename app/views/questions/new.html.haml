@@ -20,6 +20,8 @@
       .input-group
         = ff.text_field :body, placeholder: "Answer", class: 'form-control'
         = ff.remove_nested_fields_link "Remove", class: 'input-group-addon'
+        = ff.hidden_field :user_id, value: current_user.id
+        = ff.hidden_field :correct, value: true
       %br
     = f.add_nested_fields_link :answers, "Add another right answer", class: "btn btn-default btn-sm"
 
