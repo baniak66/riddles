@@ -1,0 +1,35 @@
+%h3 New question
+=form_for @question do |f|
+  - if @question.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@question.errors.count, "error")} prohibited this question from being saved:"
+      %ul
+        - @question.errors.full_messages.each do |msg|
+          %li= msg
+
+  .form-group
+    = f.text_field :body, placeholder: 'Question text', class: 'form-control'
+  .form-group
+    = f.text_field :time, placeholder: 'Seconds to answer', class: 'form-control'
+
+  .form-group
+    = f.nested_fields_for :answers do |ff|
+      = ff.remove_nested_fields_link "Remove answer"
+      = ff.text_field :body, placeholder: "Answer", class: 'form-control'
+    = f.add_nested_fields_link :answers, "Add another right answer", class: "btn btn-default btn-sm"
+
+  .form-group
+    = radio_button_tag(:other_answer, true)
+    = label_tag(:yes, "Automaticaly count that any other answer is wrong")
+    = radio_button_tag(:other_answer, false)
+    = label_tag(:no, "Give me the opportunity to review the answers")
+  .form-group
+    = f.text_field :comment, placeholder: 'Comment', class: 'form-control'
+  .form-group
+    = radio_button_tag(:publish, true)
+    = label_tag(:public, "Allow publication on a common feed")
+    = radio_button_tag(:publish, false)
+    = label_tag(:private, "Deny")
+
+
+  = f.submit 'Save', class: 'btn btn-info'

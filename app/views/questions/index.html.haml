@@ -12,7 +12,13 @@
     %tr
       %th Question text
       %th Time for answer
+      %th Public
+      %th Other answers
+      %th Number of answers
     -@questions.each do |q|
       %tr
         %td= q.body
         %td= q.time
+        %td= q.publish
+        %td= q.other_answer
+        %td= q.answers.all.count
