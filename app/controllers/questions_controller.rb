@@ -45,10 +45,14 @@ class QuestionsController < ApplicationController
 
   def result
     @answer = Answer.find(params[:answer_id])
-    if @answer.check(@answer.question_id)
-      @answer.correct = true
+    if @answer.question.other_answer
+      if @answer.check(@answer.question_id, true)
+        @answer.correct = true
+      elsif @answer.check(@answer.question_id, false)
+        @answer.correct = false
+      end
     else
-      @answer.correct = false
+      @answer.check(@answer.question_id, true) ? @answer.correct = true : @answer.correct = false
     end
   end
 

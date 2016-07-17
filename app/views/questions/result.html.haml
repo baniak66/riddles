@@ -1,5 +1,7 @@
--if @answer.correct
+-if @answer.correct == true
   %h3 Congratulations, your answer is correct!
--else
+-elsif @answer.correct == false
   %h3 You lose, your answer is incorrect!
   %h4= @answer.question.comment
+-else @answer.correct.blank?
+  %h4 You have to wait for question author response.
