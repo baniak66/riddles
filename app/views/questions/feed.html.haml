@@ -1,0 +1,10 @@
+%h3 Feed
+
+%table.table
+  %tr
+    %th Question author
+    %th Time for answer
+  -@questions.each do |q|
+    %tr
+      %td= q.user.email
+      %td= q.time

@@ -10,6 +10,10 @@ class QuestionsController < ApplicationController
     @answer = @question.answers.build
   end
 
+  def show
+    @question = Question.find(params[:id])
+  end
+
   def create
     @question = Question.new(question_params)
     @question.user_id = current_user.id
@@ -20,6 +24,10 @@ class QuestionsController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def feed
+    @questions = Question.all.where.not(user_id: current_user.id, publish: true)
   end
 
   private

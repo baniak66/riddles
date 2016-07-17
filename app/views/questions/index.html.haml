@@ -15,6 +15,7 @@
       %th Public
       %th Other answers
       %th Number of answers
+      %th
     -@questions.each do |q|
       %tr
         %td= q.body
@@ -22,3 +23,4 @@
         %td= q.publish
         %td= q.other_answer
         %td= q.answers.all.count
+        %td= link_to "show", question_path(q.id), class: "btn btn-primary btn-sm"
