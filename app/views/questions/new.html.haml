@@ -8,24 +8,32 @@
           %li= msg
 
   .form-group
+    = f.label "Question text"
     = f.text_field :body, placeholder: 'Question text', class: 'form-control'
   .form-group
-    = f.text_field :time, placeholder: 'Seconds to answer', class: 'form-control'
+    = f.label "How many seconds has user to think"
+    = f.text_field :time, placeholder: 'Value can be between 3 to 300', class: 'form-control'
 
   .form-group
+    = f.label "Right answers & variations of the answer"
     = f.nested_fields_for :answers do |ff|
-      = ff.remove_nested_fields_link "Remove answer"
-      = ff.text_field :body, placeholder: "Answer", class: 'form-control'
+      .input-group
+        = ff.text_field :body, placeholder: "Answer", class: 'form-control'
+        = ff.remove_nested_fields_link "Remove", class: 'input-group-addon'
+      %br
     = f.add_nested_fields_link :answers, "Add another right answer", class: "btn btn-default btn-sm"
 
   .form-group
+    = f.label "Other answers"
     = radio_button_tag(:other_answer, true)
     = label_tag(:yes, "Automaticaly count that any other answer is wrong")
     = radio_button_tag(:other_answer, false)
     = label_tag(:no, "Give me the opportunity to review the answers")
   .form-group
+    = f.label "Comment"
     = f.text_field :comment, placeholder: 'Comment', class: 'form-control'
   .form-group
+    = f.label "Publication in feed"
     = radio_button_tag(:publish, true)
     = label_tag(:public, "Allow publication on a common feed")
     = radio_button_tag(:publish, false)
