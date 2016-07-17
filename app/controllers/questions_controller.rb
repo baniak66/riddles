@@ -35,6 +35,23 @@ class QuestionsController < ApplicationController
     @answer = @question.answers.build
   end
 
+  def answer
+    @question = Question.find(params[:id])
+    @answer = @question.answers.build(answer_params)
+    if @answer.save
+      redirect_to result_path(@answer.id)
+    end
+  end
+
+  def result
+    @answer = Answer.find(params[:answer_id])
+    if @answer.check(@answer.question_id)
+      @answer.correct = true
+    else
+      @answer.correct = false
+    end
+  end
+
   private
 
     def question_params
@@ -42,4 +59,7 @@ class QuestionsController < ApplicationController
         answers_attributes: [:body, :user_id, :_destroy, :correct])
     end
 
+    def answer_params
+      params.require(:answer).permit(:body, :user_id)
+    end
 end

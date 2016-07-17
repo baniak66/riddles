@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   root 'questions#index'
   resources :questions do
     get  'play', on: :member
+    post  'answer', on: :member
   end
   get  'feed', to: 'questions#feed', as: 'feed'
+  get  'result/:answer_id', to: 'questions#result', as: 'result'
 
 end

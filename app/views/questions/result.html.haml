@@ -1,0 +1,5 @@
+-if @answer.correct
+  %h3 Congratulations, your answer is correct!
+-else
+  %h3 You lose, your answer is incorrect!
+  %h4= @answer.question.comment
