@@ -1,4 +1,8 @@
-%h3{align: "center"}= @question.body
+%script{src: "app/assets/javascripts/jquery.countdown.js"}
+
+%h2{align: "center"}= @question.body
+
+#countdown
 
 =form_for @answer, url: answer_question_path, html: {id: "answer-form"} do |f|
   .form-group
@@ -12,4 +16,36 @@
     setTimeout( function(){
       $("#answer-form").submit();
     }  , #{@question.time.to_i * 1000} );
+    $("#sec").countdown({autostart: true, m: 108});
   } );
+  function countdown( elementName, minutes, seconds )
+  {
+    var element, endTime, hours, mins, msLeft, time;
+
+    function twoDigits( n )
+    {
+        return (n <= 9 ? "0" + n : n);
+    }
+
+    function updateTimer()
+    {
+        msLeft = endTime - (+new Date);
+        if ( msLeft < 1000 ) {
+            element.innerHTML = "Your time is over!";
+        } else {
+            time = new Date( msLeft );
+            hours = time.getUTCHours();
+            mins = time.getUTCMinutes();
+            element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
+            setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
+        }
+    }
+
+    element = document.getElementById( elementName );
+    endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
+    updateTimer();
+  }
+
+  countdown( "countdown", 0, #{@question.time} );
+
+
