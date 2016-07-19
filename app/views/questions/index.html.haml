@@ -1,5 +1,5 @@
 %br
--if @user.questions.empty?
+-if current_user.questions.empty?
   %h3{align: "center"} You don't have a questions.
   =link_to "Create your first!", new_question_path, class: "btn btn-info btn-block"
 
@@ -24,3 +24,5 @@
         %td= q.other_answer
         %td= q.answers.all.count
         %td= link_to "show", question_path(q.id), class: "btn btn-primary btn-sm"
+
+  = will_paginate @questions, renderer: BootstrapPagination::Rails

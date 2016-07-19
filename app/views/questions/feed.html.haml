@@ -10,3 +10,5 @@
       %td= q.user.email
       %td= q.time
       %td= link_to "Play", play_question_path(q.id), class: "btn btn-danger btn-sm"
+
+= will_paginate @questions, renderer: BootstrapPagination::Rails

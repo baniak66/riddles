@@ -4,8 +4,7 @@ class QuestionsController < ApplicationController
   before_action :check_user, only: [:play]
 
   def index
-    @user = current_user
-    @questions = @user.questions.all
+    @questions = current_user.questions.paginate(:page => params[:page], :per_page => 10)
   end
 
   def new
@@ -29,7 +28,7 @@ class QuestionsController < ApplicationController
   end
 
   def feed
-    @questions = Question.all.where.not(user_id: current_user.id, publish: false)
+    @questions = Question.paginate(:page => params[:page], :per_page => 10).where.not(user_id: current_user.id, publish: false)
   end
 
   def play
