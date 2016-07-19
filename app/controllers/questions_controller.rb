@@ -1,5 +1,8 @@
 class QuestionsController < ApplicationController
 
+  before_action :set_question, only: [:show, :play, :answer]
+  before_action :check_user, only: [:play]
+
   def index
     @user = current_user
     @questions = @user.questions.all
@@ -11,7 +14,6 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.find(params[:id])
   end
 
   def create
@@ -31,12 +33,10 @@ class QuestionsController < ApplicationController
   end
 
   def play
-    @question = Question.find(params[:id])
     @answer = @question.answers.build
   end
 
   def answer
-    @question = Question.find(params[:id])
     @answer = @question.answers.build(answer_params)
     if @answer.save
       redirect_to result_path(@answer.id)
@@ -75,4 +75,15 @@ class QuestionsController < ApplicationController
     def answer_params
       params.require(:answer).permit(:body, :user_id)
     end
+
+    def set_question
+      @question = Question.find(params[:id])
+    end
+
+    def check_user
+      if current_user.answers.map{ |a| a.question.id }.include?(@question.id)
+        redirect_to feed_path, notice: 'You have answered for this question already.'
+      end
+    end
+
 end
