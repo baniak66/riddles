@@ -18,12 +18,14 @@
     %tr
       %th #
       %th Answer text
+      %th Number of answers
       %th Action
-    -@question.answers.each_with_index do |a, i|
+    -@question.answers.all.to_a.uniq{|s| s.body}.each_with_index do |a, i|
       -index = i+1
       %tr
         %td= index
         %td= a.body
+        %td= @question.number_of_answers(a.body)
         %td
           -if a.correct.nil?
             =link_to "Right", evaluate_path(a.id, evaluation: true), method: :patch, class: "btn btn-success btn-sm"
