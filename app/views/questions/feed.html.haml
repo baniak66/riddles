@@ -3,11 +3,13 @@
 %table.table
   %tr
     %th Question author
+    %th Added
     %th Time for answer
     %th
-  -@questions.each do |q|
+  -@questions.order('created_at DESC').each do |q|
     %tr
       %td= q.user.email
+      %td= q.created_at.strftime("%d/%m/%Y")
       %td= q.time
       %td= link_to "Play", play_question_path(q.id), class: "btn btn-danger btn-sm"
 
