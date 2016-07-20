@@ -53,6 +53,7 @@ class QuestionsController < ApplicationController
     else
       @answer.check(@answer.question_id, true) ? @answer.correct = true : @answer.correct = false
     end
+    @answer.save
   end
 
   def evaluate
