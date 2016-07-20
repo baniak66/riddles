@@ -1,0 +1,14 @@
+%h3 Users rating
+
+%table.table
+  %tr
+    %th User
+    %th Correct answers
+    %th Incorrect answers
+    %th Score
+  -@users.all.sort_by(&:score).reverse.each do |u|
+    %tr
+      %td= u.email
+      %td= u.count_answers(true)
+      %td= u.count_answers(false)
+      %td= u.score

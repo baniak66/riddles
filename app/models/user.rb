@@ -16,4 +16,12 @@ class User < ApplicationRecord
 
   has_many :questions
   has_many :answers
+
+  def score
+    self.count_answers(true) - self.count_answers(false)
+  end
+
+  def count_answers(type)
+    self.answers.where(correct: type).count
+  end
 end

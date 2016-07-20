@@ -64,6 +64,10 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def rating
+    @users = User.all
+  end
+
   private
 
     def question_params

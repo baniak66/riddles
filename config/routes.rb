@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   get   'feed', to: 'questions#feed', as: 'feed'
   get   'result/:answer_id', to: 'questions#result', as: 'result'
   patch 'evaluate/:answer_id', to: 'questions#evaluate', as: 'evaluate'
+  get   'rating', to: 'questions#rating', as: 'rating'
 end
