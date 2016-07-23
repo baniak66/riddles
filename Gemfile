@@ -48,10 +48,12 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '~> 3.4'
   gem 'factory_girl_rails'
+  gem 'rails-controller-testing'
 end
 
 group :test do
   gem 'database_cleaner'
+  gem 'shoulda-matchers', '~> 3.1'
 end
 
 group :development do
