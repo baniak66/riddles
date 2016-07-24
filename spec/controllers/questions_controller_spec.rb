@@ -121,4 +121,28 @@ RSpec.describe QuestionsController, type: :controller do
       end
     end
   end
+
+  describe "Anonymous user" do
+
+    describe "GET #index" do
+      it "renders the sign in form" do
+        get :index
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
+    describe "GET #feed" do
+      it "renders the sign in form" do
+        get :feed
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+
+    describe "GET #rating" do
+      it "renders the sign in form" do
+        get :rating
+        expect(response).to redirect_to(new_user_session_path)
+      end
+    end
+  end
 end
